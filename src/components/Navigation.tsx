@@ -15,10 +15,11 @@ export default function Navigation() {
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
+    { name: 'Studio Collection', href: '/studio-collection' },
     { name: 'Courses', href: '/courses' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Reflections', href: '/reflections' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Studio Collection', href: '/studio-collection' },
   ]
 
   useEffect(() => {
