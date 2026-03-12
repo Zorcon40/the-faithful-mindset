@@ -122,7 +122,7 @@ export default function Reflections() {
               More Reflections Coming Soon
             </h2>
             <p className="text-lg text-brand-charcoal/80 mb-8">
-              Subscribe to our newsletter to receive new reflections as they're published
+              Subscribe to our newsletter to receive new reflections as they&apos;re published
             </p>
             <motion.a
               href="/contact"

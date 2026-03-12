@@ -58,7 +58,7 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              We'd love to hear from you
+              We&apos;d love to hear from you
             </motion.p>
           </div>
         </section>
