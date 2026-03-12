@@ -18,20 +18,17 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Discover the fascinating brain activity that occurs during prayer and how it impacts your mental and spiritual wellbeing.',
     category: 'Faith & Neuroscience',
     date: 'March 15, 2025',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['prayer', 'neuroscience', 'brain science', 'spirituality', 'meditation'],
-    content: `
-# The Neuroscience of Prayer: What Happens in Your Brain When You Pray
-
-Prayer has been a cornerstone of spiritual practice for millennia, but only recently have we begun to understand what actually happens in our brains when we pray. The intersection of neuroscience and spirituality reveals fascinating insights about this ancient practice.
+    content: `Prayer has been a cornerstone of spiritual practice for millennia, but only recently have we begun to understand what actually happens in our brains when we pray. The intersection of neuroscience and spirituality reveals fascinating insights about this ancient practice.
 
 ## The Brain on Prayer
 
 When you engage in prayer, multiple regions of your brain activate in a coordinated symphony. Brain imaging studies using fMRI technology have shown that prayer activates the prefrontal cortex—the area responsible for focus and attention—while simultaneously quieting the parietal lobe, which helps create a sense of timelessness and connection to something greater than ourselves.
 
-### Key Brain Regions Activated During Prayer:
+### Key Brain Regions Activated During Prayer
 
 **The Prefrontal Cortex:** This region, associated with focused attention and intention, shows increased activity during prayer. This is the same area that activates when we're deeply concentrating on a task or engaging in meaningful conversation.
 
@@ -41,22 +38,11 @@ When you engage in prayer, multiple regions of your brain activate in a coordina
 
 ## The Chemistry of Connection
 
-Prayer doesn't just change brain activity—it alters brain chemistry. Research has shown that regular prayer practice can:
-
-- **Increase dopamine production**, creating feelings of reward and motivation
-- **Boost serotonin levels**, improving mood and emotional regulation
-- **Reduce cortisol**, the stress hormone that contributes to anxiety
-- **Stimulate oxytocin release**, the "bonding hormone" that creates feelings of connection and trust
+Prayer doesn't just change brain activity—it alters brain chemistry. Research has shown that regular prayer practice can increase dopamine production, creating feelings of reward and motivation, boost serotonin levels for improved mood and emotional regulation, reduce cortisol (the stress hormone that contributes to anxiety), and stimulate oxytocin release—the "bonding hormone" that creates feelings of connection and trust.
 
 ## Neuroplasticity and Spiritual Practice
 
-Perhaps most remarkably, consistent prayer practice can actually reshape your brain through neuroplasticity. Just as learning a musical instrument or new language creates new neural pathways, regular prayer strengthens the neural networks associated with:
-
-- Emotional regulation
-- Compassion and empathy
-- Stress resilience
-- Focused attention
-- Sense of meaning and purpose
+Perhaps most remarkably, consistent prayer practice can actually reshape your brain through neuroplasticity. Just as learning a musical instrument or new language creates new neural pathways, regular prayer strengthens the neural networks associated with emotional regulation, compassion and empathy, stress resilience, focused attention, and a sense of meaning and purpose.
 
 Studies of contemplative practitioners—monks, nuns, and devoted prayer practitioners—show measurable differences in brain structure, particularly in areas associated with attention, emotional processing, and self-awareness.
 
@@ -68,7 +54,7 @@ This suggests that prayer isn't just an internal mental exercise; your brain pro
 
 ## Practical Implications
 
-Understanding the neuroscience of prayer doesn't diminish its spiritual significance—it deepens our appreciation for how God designed our brains to connect with Him. This knowledge can inform our practice:
+Understanding the neuroscience of prayer doesn't diminish its spiritual significance—it deepens our appreciation for how God designed our brains to connect with Him. This knowledge can inform our practice.
 
 **Consistency Matters:** Like any practice that reshapes the brain, regular prayer is more transformative than sporadic practice.
 
@@ -80,16 +66,7 @@ Understanding the neuroscience of prayer doesn't diminish its spiritual signific
 
 While neuroscience can show us what happens in the brain during prayer, it cannot fully explain the subjective experience of divine encounter, the sense of peace that surpasses understanding, or the transformative power of answered prayer. The brain is the instrument through which we experience God, but God is not limited to our neurology.
 
-As we continue to explore the fascinating intersection of faith and science, we find that they need not be at odds. Instead, understanding how prayer affects our brains can deepen our appreciation for both the gift of prayer and the intricate design of the human mind.
-
-## Reflection Questions
-
-- How does understanding the neuroscience of prayer change your perspective on this spiritual practice?
-- What types of prayer do you find most meaningful, and how might they be affecting your brain differently?
-- How might you incorporate more consistent prayer practice to experience its neurological benefits?
-
-*The brain God gave you is designed for connection with Him. Prayer is not just a spiritual discipline—it's a neurological pathway to transformation.*
-    `
+As we continue to explore the fascinating intersection of faith and science, we find that they need not be at odds. Instead, understanding how prayer affects our brains can deepen our appreciation for both the gift of prayer and the intricate design of the human mind.`
   },
   {
     slug: 'gratitude-rewires-brain',
@@ -97,7 +74,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Scientific research reveals how practicing gratitude creates lasting changes in your brain, leading to increased happiness and resilience.',
     category: 'Faith & Neuroscience',
     date: 'February 28, 2025',
-    image: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['gratitude', 'neuroplasticity', 'happiness', 'brain science', 'positive psychology'],
@@ -109,7 +86,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Romans 12:2 takes on new meaning when we understand how our brains can be transformed through intentional practice.',
     category: 'Faith & Neuroscience',
     date: 'February 14, 2025',
-    image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['neuroplasticity', 'Romans 12:2', 'transformation', 'spiritual growth', 'brain change'],
@@ -121,7 +98,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Discover the neurochemical cascade that occurs during worship and how it impacts your emotional and spiritual wellbeing.',
     category: 'Faith & Neuroscience',
     date: 'January 30, 2025',
-    image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['worship', 'brain chemistry', 'dopamine', 'oxytocin', 'spiritual practice'],
@@ -133,7 +110,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Hope is more than wishful thinking—it&apos;s a neurological state that activates specific brain regions and chemicals.',
     category: 'Faith & Neuroscience',
     date: 'January 15, 2025',
-    image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['hope', 'faith', 'reward system', 'dopamine', 'positive psychology'],
@@ -145,7 +122,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'While both practices calm the mind, brain imaging shows distinct differences between meditation and prayer.',
     category: 'Faith & Neuroscience',
     date: 'December 20, 2024',
-    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['meditation', 'prayer', 'brain scans', 'fMRI', 'contemplative practice'],
@@ -157,7 +134,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Learn how meditating on Scripture can literally calm the brain&apos;s fear response and reduce anxiety.',
     category: 'Faith & Neuroscience',
     date: 'December 5, 2024',
-    image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['anxiety', 'amygdala', 'Scripture', 'fear', 'stress response'],
@@ -169,7 +146,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'The neuroscience of memory reveals why remembering God&apos;s faithfulness is so central to spiritual practice.',
     category: 'Faith & Neuroscience',
     date: 'November 18, 2024',
-    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['memory', 'remembrance', 'hippocampus', 'spiritual practice', 'promises'],
@@ -181,7 +158,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Discover the brain network that activates during rest and how it relates to spiritual awareness.',
     category: 'Faith & Neuroscience',
     date: 'November 2, 2024',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['default mode network', 'mind wandering', 'contemplation', 'spiritual awareness', 'neuroscience'],
@@ -193,7 +170,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Understanding how spiritual practices affect your brain&apos;s reward system can deepen your devotional life.',
     category: 'Faith & Neuroscience',
     date: 'October 15, 2024',
-    image: 'https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['dopamine', 'spiritual disciplines', 'reward system', 'habits', 'devotion'],
@@ -205,7 +182,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Exploring what it means to be created in God&apos;s image and how that shapes our creative calling.',
     category: 'Creative Spirituality',
     date: 'September 28, 2024',
-    image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['creativity', 'imago dei', 'theology', 'calling', 'creation'],
@@ -217,7 +194,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Your creative work matters to God—not just when it&apos;s "spiritual" but in all its forms.',
     category: 'Creative Spirituality',
     date: 'September 10, 2024',
-    image: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['creative work', 'calling', 'purpose', 'God&apos;s care', 'vocation'],
@@ -229,7 +206,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Discover how the act of creating can become a contemplative spiritual practice.',
     category: 'Creative Spirituality',
     date: 'August 22, 2024',
-    image: 'https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['making', 'contemplative practice', 'prayer', 'mindfulness', 'spiritual creativity'],
@@ -241,7 +218,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'The creative journey—with its struggles and breakthroughs—mirrors the spiritual journey.',
     category: 'Creative Spirituality',
     date: 'August 5, 2024',
-    image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['creative process', 'spiritual journey', 'God&apos;s presence', 'transformation', 'growth'],
@@ -253,7 +230,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Why rest isn&apos;t the enemy of creativity—it&apos;s the source.',
     category: 'Creative Spirituality',
     date: 'July 18, 2024',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['sabbath', 'rest', 'creativity', 'renewal', 'rhythm'],
@@ -265,7 +242,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'What if your creative block isn&apos;t a problem to solve but an invitation to receive?',
     category: 'Creative Spirituality',
     date: 'July 1, 2024',
-    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['creative block', 'resistance', 'spiritual growth', 'listening', 'discernment'],
@@ -277,7 +254,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Cultivating attention is the foundation of both creative and spiritual practice.',
     category: 'Creative Spirituality',
     date: 'June 15, 2024',
-    image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['attention', 'noticing', 'mindfulness', 'observation', 'awareness'],
@@ -289,7 +266,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'The language of color and beauty reveals profound truths about God&apos;s nature and kingdom.',
     category: 'Creative Spirituality',
     date: 'May 28, 2024',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['beauty', 'color', 'aesthetics', 'God&apos;s nature', 'kingdom'],
@@ -301,7 +278,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Discovering the natural cycles that sustain creative work over the long term.',
     category: 'Creative Spirituality',
     date: 'May 10, 2024',
-    image: 'https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['rhythm', 'work-rest cycle', 'sustainability', 'creative practice', 'seasons'],
@@ -313,7 +290,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Why less clutter—physical, mental, and spiritual—creates more room for creative and spiritual flourishing.',
     category: 'Creative Spirituality',
     date: 'April 22, 2024',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['minimalism', 'space', 'simplicity', 'focus', 'clarity'],
@@ -325,7 +302,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Understanding how small, consistent actions create lasting transformation through the science of habit formation.',
     category: 'Intentional Living',
     date: 'April 5, 2024',
-    image: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['habits', 'small changes', 'transformation', 'psychology', 'incremental growth'],
@@ -337,7 +314,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'How the psychology of decision-making affects your spiritual practices and what to do about it.',
     category: 'Intentional Living',
     date: 'March 18, 2024',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['decision fatigue', 'willpower', 'routines', 'spiritual disciplines', 'mental energy'],
@@ -349,7 +326,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Why how you start your day shapes everything that follows, and how to design a morning practice that sticks.',
     category: 'Intentional Living',
     date: 'March 1, 2024',
-    image: 'https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['morning routine', 'rituals', 'habits', 'devotional practice', 'intentional living'],
@@ -361,7 +338,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'The psychology of environmental design and its profound impact on spiritual practice.',
     category: 'Intentional Living',
     date: 'February 12, 2024',
-    image: 'https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['environment', 'space design', 'habits', 'sacred space', 'intentional living'],
@@ -373,7 +350,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Understanding the neuroscience of habit formation to create sustainable spiritual practices.',
     category: 'Intentional Living',
     date: 'January 25, 2024',
-    image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['habits', 'habit loop', 'spiritual disciplines', 'behavior change', 'neuroscience'],
@@ -385,7 +362,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Reclaiming your attention is one of the most important spiritual disciplines of our time.',
     category: 'Intentional Living',
     date: 'January 8, 2024',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['attention', 'focus', 'distraction', 'mindfulness', 'presence'],
@@ -397,7 +374,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'How to cultivate contentment in a culture designed to make you perpetually dissatisfied.',
     category: 'Intentional Living',
     date: 'December 22, 2023',
-    image: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['contentment', 'gratitude', 'satisfaction', 'consumer culture', 'peace'],
@@ -409,7 +386,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'How engaging with Scripture can help regulate emotions and build psychological resilience.',
     category: 'Intentional Living',
     date: 'December 5, 2023',
-    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['emotional regulation', 'Scripture', 'psychology', 'resilience', 'mental health'],
@@ -421,7 +398,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Understanding the psychology of comparison and how to find freedom from its grip.',
     category: 'Intentional Living',
     date: 'November 17, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['comparison', 'social media', 'identity', 'freedom', 'self-worth'],
@@ -433,7 +410,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Why building buffer space into your life is essential for mental health and spiritual growth.',
     category: 'Intentional Living',
     date: 'October 30, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '7 min read',
     keywords: ['margin', 'white space', 'rest', 'mental health', 'boundaries'],
@@ -445,7 +422,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Exploring how spiritual practices and professional mental health care complement each other beautifully.',
     category: 'Mental Wellness',
     date: 'October 12, 2023',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['therapy', 'faith', 'mental health', 'integration', 'healing'],
@@ -457,7 +434,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Learning to distinguish between the Holy Spirit&apos;s conviction and shame&apos;s destructive voice.',
     category: 'Mental Wellness',
     date: 'September 25, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['shame', 'conviction', 'guilt', 'Holy Spirit', 'mental health'],
@@ -469,7 +446,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Addressing anxiety requires both practical tools and spiritual practices—here&apos;s how they work together.',
     category: 'Mental Wellness',
     date: 'September 8, 2023',
-    image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['anxiety', 'trust', 'mental health', 'coping skills', 'faith'],
@@ -481,7 +458,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Forgiveness isn&apos;t just spiritually important—it&apos;s neurologically healing.',
     category: 'Mental Wellness',
     date: 'August 20, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['forgiveness', 'neuroscience', 'healing', 'resentment', 'brain health'],
@@ -493,7 +470,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Understanding the difference between clinical depression and spiritual darkness—and why both deserve compassion.',
     category: 'Mental Wellness',
     date: 'August 2, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['depression', 'dark night of the soul', 'mental health', 'spiritual struggle', 'compassion'],
@@ -505,7 +482,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Why setting healthy boundaries isn&apos;t selfish—it&apos;s essential for loving well.',
     category: 'Mental Wellness',
     date: 'July 15, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['boundaries', 'self-care', 'relationships', 'spiritual health', 'limits'],
@@ -517,7 +494,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Understanding why expressing grief and pain is psychologically healthy and spiritually important.',
     category: 'Mental Wellness',
     date: 'June 28, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['lament', 'grief', 'emotions', 'Psalms', 'mental health'],
@@ -529,7 +506,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Why being kind to yourself isn&apos;t self-indulgent—it&apos;s biblical and psychologically sound.',
     category: 'Mental Wellness',
     date: 'June 10, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['self-compassion', 'self-criticism', 'grace', 'mental health', 'kindness'],
@@ -541,7 +518,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Understanding how trauma impacts faith and how to pursue healing with compassion.',
     category: 'Mental Wellness',
     date: 'May 22, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '9 min read',
     keywords: ['trauma', 'healing', 'PTSD', 'faith', 'recovery'],
@@ -553,7 +530,7 @@ As we continue to explore the fascinating intersection of faith and science, we 
     excerpt: 'Why choosing rest in a productivity-obsessed culture is both spiritually and psychologically revolutionary.',
     category: 'Mental Wellness',
     date: 'May 5, 2023',
-    image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+    image: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
     author: 'Hilary Williamson',
     readTime: '8 min read',
     keywords: ['rest', 'sabbath', 'hustle culture', 'burnout', 'resistance'],

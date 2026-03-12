@@ -88,15 +88,36 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
         {/* Article Content */}
         <section className="px-6 pb-24">
           <motion.article
-            className="max-w-3xl mx-auto prose prose-lg prose-pink prose-headings:font-light prose-headings:text-brand-charcoal prose-p:text-brand-charcoal/80 prose-a:text-brand-pink prose-strong:text-brand-charcoal prose-ul:text-brand-charcoal/80"
+            className="max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br />').replace(/#{1,6} /g, (match) => {
-              const level = match.trim().length
-              return `<h${level}>`
-            }).replace(/<br \/><br \/>/g, '</p><p>').replace(/^\*\*(.*?)\*\*/gm, '<strong>$1</strong>') }}
-          />
+          >
+            <div className="prose prose-lg max-w-none
+              prose-headings:font-light prose-headings:text-brand-charcoal prose-headings:mb-4 prose-headings:mt-8
+              prose-h2:text-3xl prose-h2:font-light prose-h2:gradient-text prose-h2:mb-6 prose-h2:mt-12
+              prose-h3:text-2xl prose-h3:font-light prose-h3:text-brand-charcoal prose-h3:mb-4 prose-h3:mt-8
+              prose-p:text-brand-charcoal/80 prose-p:leading-relaxed prose-p:mb-6 prose-p:text-lg
+              prose-a:text-brand-pink prose-a:no-underline hover:prose-a:underline
+              prose-strong:text-brand-charcoal prose-strong:font-semibold
+              prose-ul:text-brand-charcoal/80 prose-ul:my-6 prose-ul:space-y-2
+              prose-li:text-brand-charcoal/80 prose-li:leading-relaxed
+              prose-blockquote:border-l-4 prose-blockquote:border-brand-pink prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-brand-charcoal/70"
+            >
+              {post.content.split('\n\n').map((paragraph, idx) => {
+                if (paragraph.startsWith('## ')) {
+                  return <h2 key={idx} className="text-3xl font-light gradient-text mb-6 mt-12">{paragraph.replace('## ', '')}</h2>
+                } else if (paragraph.startsWith('### ')) {
+                  return <h3 key={idx} className="text-2xl font-light text-brand-charcoal mb-4 mt-8">{paragraph.replace('### ', '')}</h3>
+                } else if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
+                  return <p key={idx} className="text-brand-charcoal/80 leading-relaxed mb-6 text-lg"><strong>{paragraph.replace(/\*\*/g, '')}</strong></p>
+                } else if (paragraph.trim()) {
+                  return <p key={idx} className="text-brand-charcoal/80 leading-relaxed mb-6 text-lg">{paragraph}</p>
+                }
+                return null
+              })}
+            </div>
+          </motion.article>
           
           {/* Share & Related */}
           <div className="max-w-3xl mx-auto mt-16 pt-8 border-t border-pink-100">
