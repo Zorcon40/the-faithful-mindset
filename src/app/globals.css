@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Tangerine:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
 
 :root {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-script: 'Dancing Script', cursive;
-  --font-display: 'Tangerine', cursive;
 }
 
 * {
@@ -46,11 +45,11 @@ body {
   }
   
   .gradient-text {
-    background: linear-gradient(135deg, #D91184 0%, #FF1493 50%, #FF69B4 100%);
+    background: linear-gradient(135deg, #B91C7D 0%, #E01582 50%, #D9469C 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradient-shift 3s ease infinite;
+    font-weight: 500;
   }
   
   @keyframes gradient-shift {
@@ -95,7 +94,7 @@ body {
     50% { opacity: 0.5; }
   }
   
-  .font-display {
-    font-family: var(--font-display);
+  .font-script {
+    font-family: var(--font-script);
   }
 }

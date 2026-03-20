@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
@@ -10,24 +11,28 @@ const courses = [
     description: 'Explore the intersection of spiritual wisdom and neuroscience in this thoughtful six-week journey.',
     weeks: 6,
     format: 'Personal & Facilitator Editions',
+    image: '/assets/blog-images/faith-hands.jpg',
   },
   {
     title: 'Small Intentional Change',
     description: 'Discover how small daily decisions shape a meaningful life through guided reflection and practice.',
     weeks: 6,
     format: 'Personal & Facilitator Editions',
+    image: '/assets/blog-images/morning-routine.jpg',
   },
   {
     title: 'Becoming the Woman You Respect',
     description: 'A transformative course on aligning your actions with your values and living with integrity.',
     weeks: 6,
     format: 'Personal & Facilitator Editions',
+    image: '/assets/blog-images/self-care.jpg',
   },
   {
     title: 'Living on Purpose in Small Ways',
     description: 'Learn to recognize and cultivate purposeful living through everyday intentional choices.',
     weeks: 6,
     format: 'Personal & Facilitator Editions',
+    image: '/assets/blog-images/goal-planning.jpg',
   },
 ]
 
@@ -52,7 +57,7 @@ export default function Courses() {
           />
           <div className="max-w-4xl mx-auto text-center relative z-10">
             <motion.h1 
-              className="font-display text-5xl md:text-6xl lg:text-7xl text-brand-charcoal mb-6"
+              className="font-script text-5xl md:text-6xl lg:text-7xl text-brand-charcoal mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -159,30 +164,41 @@ export default function Courses() {
               {courses.map((course, index) => (
                 <motion.div 
                   key={course.title} 
-                  className="glass-effect p-8 rounded-2xl shadow-lg"
+                  className="glass-effect rounded-2xl shadow-lg overflow-hidden"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -5, scale: 1.02 }}
                 >
-                  <h3 className="text-2xl font-light text-brand-charcoal mb-4">
-                    {course.title}
-                  </h3>
-                  <p className="text-brand-charcoal/80 mb-6 leading-relaxed">
-                    {course.description}
-                  </p>
-                  <div className="flex items-center justify-between text-sm text-brand-charcoal/60 mb-6">
-                    <span>{course.weeks} Weeks</span>
-                    <span>{course.format}</span>
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={course.image}
+                      alt={course.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
-                  <motion.button 
-                    className="w-full px-6 py-3 bg-gradient-to-r from-brand-pink to-pink-600 text-white rounded-full shadow-lg"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Coming Soon
-                  </motion.button>
+                  <div className="p-8">
+                    <h3 className="text-2xl font-light text-brand-charcoal mb-4">
+                      {course.title}
+                    </h3>
+                    <p className="text-brand-charcoal/80 mb-6 leading-relaxed">
+                      {course.description}
+                    </p>
+                    <div className="flex items-center justify-between text-sm text-brand-charcoal/60 mb-6">
+                      <span>{course.weeks} Weeks</span>
+                      <span>{course.format}</span>
+                    </div>
+                    <motion.button 
+                      className="w-full px-6 py-3 bg-gradient-to-r from-brand-pink to-pink-600 text-white rounded-full shadow-lg"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Coming Soon
+                    </motion.button>
+                  </div>
                 </motion.div>
               ))}
             </div>

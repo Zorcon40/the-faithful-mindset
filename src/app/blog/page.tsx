@@ -94,12 +94,14 @@ export default function Blog() {
                         alt={post.title}
                         fill
                         className="object-cover transition-transform duration-300 hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     </div>
                     <div className="p-6">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="text-xs text-brand-pink font-medium">{post.category}</span>
                         <span className="text-xs text-brand-charcoal/50">{post.date}</span>
+                        <span className="text-xs text-brand-charcoal/50">• {post.readTime}</span>
                       </div>
                       <h2 className="text-xl font-light text-brand-charcoal mb-3 hover:text-brand-pink transition-colors">
                         {post.title}

@@ -250,18 +250,13 @@ export default function Home() {
             >
               <Link
                 href="/studio-collection"
-                className="group relative inline-block px-10 py-4 bg-gradient-to-r from-brand-pink to-pink-600 text-white rounded-full overflow-hidden shadow-glow"
+                className="group relative inline-block px-10 py-4 bg-gradient-to-r from-brand-pink to-pink-600 text-white rounded-full overflow-hidden shadow-glow hover:shadow-glow-hover transition-shadow"
               >
-                <span className="relative z-10">View Full Collection</span>
-                <motion.div
-                  className="absolute inset-0 bg-white"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <span className="absolute inset-0 flex items-center justify-center text-brand-pink opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-300">View Full Collection</span>
+                <span className="absolute inset-0 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 font-medium">
                   View Full Collection →
                 </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-700 to-pink-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
             </motion.div>
           </div>
