@@ -33,18 +33,16 @@ export default function Home() {
           
           {/* Hero Flower Background with Parallax */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 w-full h-full"
             style={{ y: heroY, opacity: heroOpacity }}
           >
-            <div className="relative w-[70%] h-[70%]">
-              <Image
-                src="/assets/marketing/Marketing /White_dahlia_hero_bloom.png"
-                alt="White Dahlia"
-                fill
-                className="object-contain opacity-40"
-                priority
-              />
-            </div>
+            <Image
+              src="/assets/marketing/Marketing /White_dahlia_hero_bloom.png"
+              alt="White Dahlia"
+              fill
+              className="object-cover opacity-30"
+              priority
+            />
           </motion.div>
           
           {/* Floating Particles */}
