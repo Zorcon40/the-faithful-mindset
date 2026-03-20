@@ -36,13 +36,15 @@ export default function Home() {
             className="absolute inset-0 flex items-center justify-center"
             style={{ y: heroY, opacity: heroOpacity }}
           >
-            <Image
-              src="/assets/marketing/Marketing /White_dahlia_hero_bloom.png"
-              alt="White Dahlia"
-              fill
-              className="object-cover opacity-40"
-              priority
-            />
+            <div className="relative w-[70%] h-[70%]">
+              <Image
+                src="/assets/marketing/Marketing /White_dahlia_hero_bloom.png"
+                alt="White Dahlia"
+                fill
+                className="object-contain opacity-40"
+                priority
+              />
+            </div>
           </motion.div>
           
           {/* Floating Particles */}
@@ -175,10 +177,10 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-brand-charcoal mb-4">
-                The Declarations Coffee Table Series
+                The Garden of Declarations Series
               </h2>
               <p className="text-lg md:text-xl text-brand-charcoal/80">
-                A collection of 12 beautiful reminders for the heart
+                A collection of beautiful coffee table books for the heart
               </p>
             </motion.div>
             

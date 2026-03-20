@@ -70,7 +70,7 @@ export default function About() {
                 whileHover={{ scale: 1.02 }}
               >
                 <Image
-                  src="/assets/marketing/Marketing /Website Portrait.png"
+                  src="/assets/marketing/Marketing /New_Website_Portrait.jpg"
                   alt="Hilary Williamson"
                   fill
                   className="object-cover"

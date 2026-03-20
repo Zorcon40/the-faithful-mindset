@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Tangerine:wght@400;700&display=swap');
 
 :root {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-script: 'Dancing Script', cursive;
+  --font-display: 'Tangerine', cursive;
 }
 
 * {
@@ -26,6 +27,22 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  /* Fix for hover scale quality degradation */
+  button, [role="button"], .hover-lift {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* Smooth hover transforms */
+  .hover-lift,
+  button:hover,
+  [role="button"]:hover {
+    will-change: transform;
   }
   
   .gradient-text {
@@ -76,5 +93,9 @@ body {
   @keyframes pulse-slow {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
+  }
+  
+  .font-display {
+    font-family: var(--font-display);
   }
 }

@@ -52,7 +52,7 @@ export default function Courses() {
           />
           <div className="max-w-4xl mx-auto text-center relative z-10">
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-light text-brand-charcoal mb-6"
+              className="font-display text-5xl md:text-6xl lg:text-7xl text-brand-charcoal mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -71,12 +71,8 @@ export default function Courses() {
         </section>
 
         {/* Course Format */}
-        <section className="py-12 px-6 relative overflow-hidden">
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100"
-            animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          />
+        <section className="py-12 px-6 relative overflow-hidden" style={{ backgroundColor: '#E0CEB7' }}>
+          <div className="absolute inset-0" style={{ backgroundColor: '#E0CEB7' }} />
           <div className="max-w-4xl mx-auto relative z-10">
             <h2 className="text-3xl font-light text-brand-charcoal mb-8 text-center">
               Course Format

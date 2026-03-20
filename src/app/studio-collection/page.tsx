@@ -43,7 +43,7 @@ export default function StudioCollection() {
           
           <div className="max-w-4xl mx-auto text-center relative z-10">
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-light text-brand-charcoal mb-6"
+              className="font-display text-5xl md:text-6xl lg:text-7xl text-brand-charcoal mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -106,13 +106,13 @@ export default function StudioCollection() {
                 />
               </motion.div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-brand-charcoal mb-4">
-                The Declarations Coffee Table Series
+                The Garden of Declarations Series
               </h2>
               <p className="text-lg md:text-xl text-brand-charcoal/80 max-w-2xl mx-auto mb-6">
-                A collection of 12 beautiful reminders for the heart
+                A collection of beautiful coffee table books for the heart
               </p>
               <p className="gradient-text font-medium text-lg">
-                12 BOOKS • 12 BEAUTIFUL MESSAGES • INFINITE POSSIBILITY
+                BEAUTIFUL MESSAGES • INFINITE POSSIBILITY
               </p>
             </motion.div>
 
