@@ -3,8 +3,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/Footer'
 
 export default function Home() {
   const { scrollYProgress } = useScroll()
@@ -12,9 +10,6 @@ export default function Home() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   return (
-    <>
-      <Navigation />
-      
       <main className="min-h-screen relative pt-24">
         {/* Hero Section */}
         <section className="relative w-full min-h-[90vh] flex items-center justify-center overflow-hidden -mt-24">
@@ -373,8 +368,5 @@ export default function Home() {
           </motion.div>
         </section>
       </main>
-      
-      <Footer />
-    </>
   )
 }

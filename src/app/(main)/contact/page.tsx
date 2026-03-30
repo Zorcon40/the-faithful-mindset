@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/Footer'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -26,9 +24,6 @@ export default function Contact() {
   }
 
   return (
-    <>
-      <Navigation />
-      
       <main className="min-h-screen relative pt-24">
         {/* Hero Section */}
         <section className="py-24 px-6 relative overflow-hidden">
@@ -209,8 +204,5 @@ export default function Contact() {
           </div>
         </section>
       </main>
-      
-      <Footer />
-    </>
   )
 }

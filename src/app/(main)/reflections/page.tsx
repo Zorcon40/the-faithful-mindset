@@ -3,8 +3,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/Footer'
 
 const galleryImages = [
   {
@@ -46,9 +44,6 @@ export default function Reflections() {
   }, [])
 
   return (
-    <>
-      <Navigation />
-      
       <main className="min-h-screen relative pt-24" style={{ backgroundColor: '#C2D0BF' }}>
         {/* Hero Section */}
         <section className="py-24 px-6 relative overflow-hidden">
@@ -170,8 +165,5 @@ export default function Reflections() {
           </div>
         </section>
       </main>
-      
-      <Footer />
-    </>
   )
 }

@@ -2,14 +2,9 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/Footer'
 
 export default function About() {
   return (
-    <>
-      <Navigation />
-      
       <main className="min-h-screen relative pt-24">
         {/* Hero Section */}
         <section className="py-24 px-6 relative overflow-hidden">
@@ -217,8 +212,5 @@ export default function About() {
           </div>
         </section>
       </main>
-      
-      <Footer />
-    </>
   )
 }

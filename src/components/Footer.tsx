@@ -6,7 +6,7 @@ import { Instagram, Facebook, Mail, Heart } from 'lucide-react'
 
 export default function Footer() {
   const navLinks = [
-    { name: 'Home', href: '/' },
+    { name: 'Home', href: '/home' },
     { name: 'About', href: '/about' },
     { name: 'Studio Collection', href: '/studio-collection' },
     { name: 'Courses', href: '/courses' },

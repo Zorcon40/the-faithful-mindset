@@ -4,8 +4,6 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/Footer'
 import { blogPosts } from '@/data/blogPosts'
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
@@ -16,9 +14,6 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <>
-      <Navigation />
-      
       <main className="min-h-screen relative pt-24">
         {/* Hero Section */}
         <section className="py-16 px-6 relative overflow-hidden">
@@ -172,8 +167,5 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
           </div>
         </section>
       </main>
-      
-      <Footer />
-    </>
   )
 }

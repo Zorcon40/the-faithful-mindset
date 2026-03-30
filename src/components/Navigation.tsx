@@ -13,7 +13,7 @@ export default function Navigation() {
   const navOpacity = useTransform(scrollY, [0, 100], [0.95, 1])
   
   const navItems = [
-    { name: 'Home', href: '/' },
+    { name: 'Home', href: '/home' },
     { name: 'About', href: '/about' },
     { name: 'Studio Collection', href: '/studio-collection' },
     { name: 'Courses', href: '/courses' },
@@ -46,7 +46,7 @@ export default function Navigation() {
             whileHover={{ scale: 1.1, rotate: 5 }}
             transition={{ duration: 0.3 }}
           >
-            <Link href="/" className="flex items-center">
+            <Link href="/home" className="flex items-center">
               <Image
                 src="/assets/marketing/Marketing /The_Faithful_Mindset_Logo.png"
                 alt="The Faithful Mindset"

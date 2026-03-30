@@ -2,8 +2,6 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/Footer'
 
 const courses = [
   {
@@ -38,9 +36,6 @@ const courses = [
 
 export default function Courses() {
   return (
-    <>
-      <Navigation />
-      
       <main className="min-h-screen relative pt-24">
         {/* Hero Section */}
         <section className="py-24 px-6 relative overflow-hidden">
@@ -228,8 +223,5 @@ export default function Courses() {
           </div>
         </section>
       </main>
-      
-      <Footer />
-    </>
   )
 }
