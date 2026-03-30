@@ -1,5 +1,23 @@
 import type { GardenScene } from './types'
 
+/**
+ * Book hotspot — production asset strategy (per technical plan):
+ *
+ * | Approach                          | When to use                                      |
+ * |----------------------------------|--------------------------------------------------|
+ * | Lottie or short video on click    | Best default: designer delivers motion once      |
+ * | Static image swap + Framer Motion | Low lift; closed book → open spread             |
+ * | CSS 3D transforms                 | Stylized, not photoreal                          |
+ * | Rigged WebGL book                 | Only with budget for 3D pipeline + ongoing work  |
+ *
+ * Phase 1 uses modal copy only; wire `lottie-react` or a video element when assets are ready.
+ */
+export const bookHotspotAssetStrategy = {
+  recommended: 'lottie_or_prerendered_video' as const,
+  acceptableLowLift: 'static_image_swap_with_motion' as const,
+  deferUntilBudget: 'webgl_rigged_mesh' as const,
+}
+
 /** Concept data — replace images and copy as your narrative grows */
 export const gateClosedImage =
   '/assets/marketing/Marketing /White_dahlia_hero_bloom.png'

@@ -61,6 +61,9 @@ export function GardenExperience() {
     if (!el) return
     if (activeHotspot) {
       el.showModal()
+      queueMicrotask(() => {
+        el.querySelector<HTMLButtonElement>('button')?.focus()
+      })
     } else {
       el.close()
     }
@@ -180,7 +183,11 @@ export function GardenExperience() {
               <p className="mb-4 text-center text-sm text-stone-400">
                 Click a highlighted area (or Tab + Enter) to explore.
               </p>
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-xl">
+              <div
+                className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-xl"
+                role="group"
+                aria-label="Interactive garden scene. Tab between highlights; press Enter or Space to open."
+              >
                 <Image
                   src={insideGardenScene.imageSrc}
                   alt={insideGardenScene.imageAlt}
@@ -201,6 +208,12 @@ export function GardenExperience() {
                       height: `${h.h}%`,
                     }}
                     onClick={() => setActiveHotspotId(h.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        setActiveHotspotId(h.id)
+                      }
+                    }}
                   />
                 ))}
               </div>
@@ -211,15 +224,23 @@ export function GardenExperience() {
 
       <dialog
         ref={dialogRef}
+        aria-labelledby={activeHotspot ? 'garden-hotspot-title' : undefined}
+        aria-describedby={activeHotspot ? 'garden-hotspot-body' : undefined}
         className="max-w-md rounded-2xl border border-stone-600 bg-stone-900 p-6 text-stone-100 shadow-2xl backdrop:bg-black/60"
         onClose={() => setActiveHotspotId(null)}
       >
         {activeHotspot && (
           <div>
-            <h2 className="font-script text-2xl text-amber-100">
+            <h2
+              id="garden-hotspot-title"
+              className="font-script text-2xl text-amber-100"
+            >
               {activeHotspot.title}
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-stone-300">
+            <p
+              id="garden-hotspot-body"
+              className="mt-3 text-sm leading-relaxed text-stone-300"
+            >
               {activeHotspot.body}
             </p>
             <button
