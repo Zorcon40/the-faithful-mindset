@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "description": "The Faithful Mindset - Garden of Declarations Series website",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3030",
+    "dev:clean": "npm run clean && next dev -p 3030",
+    "dev:3000": "next dev -p 3000",
+    "clean": "rm -rf .next",
+    "clean:all": "rm -rf .next out node_modules/.cache",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "framer-motion": "^10.16.0",
@@ -16,7 +22,8 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "resend": "^6.10.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

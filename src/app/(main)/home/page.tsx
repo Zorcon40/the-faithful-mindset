@@ -3,6 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { NewsletterSubscribe } from '@/components/NewsletterSubscribe'
+import { bookCoverSlug, siteImages } from '@/lib/siteImages'
 
 export default function Home() {
   const { scrollYProgress } = useScroll()
@@ -32,7 +34,7 @@ export default function Home() {
             style={{ y: heroY, opacity: heroOpacity }}
           >
             <Image
-              src="/assets/marketing/Marketing /White_dahlia_hero_bloom.png"
+              src={siteImages.heroDahlia}
               alt="White Dahlia"
               fill
               className="object-cover opacity-30"
@@ -62,14 +64,19 @@ export default function Home() {
             />
           ))}
           
-          {/* Floating Flower Petals */}
-          {[...Array(12)].map((_, i) => (
+          {/* Floating Flower Petals — deterministic layout (no Math.random) so SSR matches client */}
+          {[...Array(12)].map((_, i) => {
+            const left = ((i * 47) % 100)
+            const top = ((i * 73) % 100)
+            const driftX = ((i * 11) % 50) - 25
+            const duration = 8 + (i % 5) * 0.85
+            return (
             <motion.div
               key={`petal-${i}`}
               className="absolute"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${left}%`,
+                top: `${top}%`,
               }}
               initial={{ opacity: 0, scale: 0 }}
               animate={{
@@ -77,10 +84,10 @@ export default function Home() {
                 scale: [0, 1, 0],
                 rotate: [0, 360],
                 y: [-20, 100],
-                x: [0, Math.random() * 50 - 25]
+                x: [0, driftX]
               }}
               transition={{
-                duration: 8 + Math.random() * 4,
+                duration,
                 repeat: Infinity,
                 delay: i * 0.8,
                 ease: "easeInOut"
@@ -88,7 +95,7 @@ export default function Home() {
             >
               <div className="w-8 h-8 bg-gradient-to-br from-pink-300 to-purple-300 rounded-full blur-sm" />
             </motion.div>
-          ))}
+          )})}
           
           
           {/* Hero Content */}
@@ -179,10 +186,10 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { name: 'Faith', color: 'Pink', image: 'Book 1 - Faith PNG.png' },
-                { name: 'Strength', color: 'Purple', image: 'Book 2 - Strength PNG.png' },
-                { name: 'Gratitude', color: 'Orange', image: 'Book 3 - Gratitude PNG.png' },
-                { name: 'Joy', color: 'Yellow', image: 'Book 4 - Joy PNG.png' },
+                { name: 'Faith', color: 'Pink', slug: bookCoverSlug.faith },
+                { name: 'Strength', color: 'Purple', slug: bookCoverSlug.strength },
+                { name: 'Gratitude', color: 'Orange', slug: bookCoverSlug.gratitude },
+                { name: 'Joy', color: 'Yellow', slug: bookCoverSlug.joy },
               ].map((book, index) => (
                 <motion.div 
                   key={book.name} 
@@ -219,7 +226,7 @@ export default function Home() {
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     />
                     <Image
-                      src={`/assets/marketing/Marketing /${book.image}`}
+                      src={siteImages.bookCover(book.slug)}
                       alt={`Declarations of ${book.name}`}
                       fill
                       className="object-contain relative z-10"
@@ -344,27 +351,7 @@ export default function Home() {
             >
               Join our community and receive thoughtful reflections on intentional living
             </motion.p>
-            <motion.form 
-              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="flex-1 px-6 py-4 border-2 border-gray-200 rounded-full focus:outline-none focus:border-brand-pink transition-all bg-white/50"
-              />
-              <motion.button
-                type="submit"
-                className="px-8 py-4 bg-gradient-to-r from-brand-pink to-pink-600 text-white rounded-full shadow-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Subscribe
-              </motion.button>
-            </motion.form>
+            <NewsletterSubscribe variant="home" source="homepage" />
           </motion.div>
         </section>
       </main>

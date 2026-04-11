@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { NewsletterSubscribe } from '@/components/NewsletterSubscribe'
 
 const courses = [
   {
@@ -9,28 +10,28 @@ const courses = [
     description: 'Explore the intersection of spiritual wisdom and neuroscience in this thoughtful six-week journey.',
     weeks: 6,
     format: 'Personal & Facilitator Editions',
-    image: '/assets/blog-images/faith-hands.jpg',
+    image: '/Blog-Images/faith-hands.jpg',
   },
   {
     title: 'Small Intentional Change',
     description: 'Discover how small daily decisions shape a meaningful life through guided reflection and practice.',
     weeks: 6,
     format: 'Personal & Facilitator Editions',
-    image: '/assets/blog-images/morning-routine.jpg',
+    image: '/Blog-Images/morning-routine.jpg',
   },
   {
     title: 'Becoming the Woman You Respect',
     description: 'A transformative course on aligning your actions with your values and living with integrity.',
     weeks: 6,
     format: 'Personal & Facilitator Editions',
-    image: '/assets/blog-images/self-care.jpg',
+    image: '/Blog-Images/self-care.jpg',
   },
   {
     title: 'Living on Purpose in Small Ways',
     description: 'Learn to recognize and cultivate purposeful living through everyday intentional choices.',
     weeks: 6,
     format: 'Personal & Facilitator Editions',
-    image: '/assets/blog-images/goal-planning.jpg',
+    image: '/Blog-Images/goal-planning.jpg',
   },
 ]
 
@@ -212,14 +213,7 @@ export default function Courses() {
             <p className="text-lg text-brand-charcoal/80 mb-8">
               Sign up for our newsletter to be notified when courses become available
             </p>
-            <motion.a
-              href="/contact"
-              className="inline-block px-10 py-4 bg-gradient-to-r from-brand-pink to-pink-600 text-white rounded-full shadow-glow"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Subscribe to Newsletter
-            </motion.a>
+            <NewsletterSubscribe variant="home" source="courses" />
           </div>
         </section>
       </main>

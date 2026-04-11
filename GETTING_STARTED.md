@@ -33,7 +33,14 @@ This will install all required packages (Next.js, React, TailwindCSS, Framer Mot
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see the site.
+Visit [http://localhost:3030](http://localhost:3030) to see the site.
+
+If the app shows missing chunk/module errors, run:
+
+```bash
+npm run clean:all
+npm run dev
+```
 
 ## What's Next?
 

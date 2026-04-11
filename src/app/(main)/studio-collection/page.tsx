@@ -2,21 +2,10 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { declarationsBooks } from '@/data/declarationsBooks'
+import { siteImages } from '@/lib/siteImages'
 
-const books = [
-  { id: 1, name: 'Faith', color: 'Pink', available: true },
-  { id: 2, name: 'Strength', color: 'Purple', available: true },
-  { id: 3, name: 'Gratitude', color: 'Orange', available: true },
-  { id: 4, name: 'Joy', color: 'Yellow', available: true },
-  { id: 5, name: 'Hope', color: 'Blue', available: false },
-  { id: 6, name: 'Peace', color: 'White', available: false },
-  { id: 7, name: 'Love', color: 'Red', available: false },
-  { id: 8, name: 'Courage', color: 'Coral', available: false },
-  { id: 9, name: 'Wisdom', color: 'Lavender', available: false },
-  { id: 10, name: 'Grace', color: 'Cream', available: false },
-  { id: 11, name: 'Purpose', color: 'Peach', available: false },
-  { id: 12, name: 'Renewal', color: 'Green', available: false },
-]
+const books = declarationsBooks
 
 export default function StudioCollection() {
   return (
@@ -93,7 +82,7 @@ export default function StudioCollection() {
                 transition={{ duration: 0.8 }}
               >
                 <Image
-                  src="/assets/marketing/Marketing /Declarations Books Series.png"
+                  src={siteImages.declarationsSeries}
                   alt="Declarations Coffee Table Series"
                   width={800}
                   height={600}
@@ -146,7 +135,7 @@ export default function StudioCollection() {
                           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                         />
                         <Image
-                          src={`/assets/marketing/Marketing /Book ${book.id} - ${book.name} PNG.png`}
+                          src={siteImages.studioBookPng(book.id, book.name)}
                           alt={`Declarations of ${book.name}`}
                           fill
                           className="object-contain relative z-10"

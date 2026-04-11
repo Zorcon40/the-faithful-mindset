@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { PlacementGridOverlay } from '@/components/dev/PlacementGridOverlay'
+import { siteImages } from '@/lib/siteImages'
+
+const siteOrigin = new URL('https://thefaithfulmindset.com')
 
 export const metadata: Metadata = {
   title: {
@@ -10,7 +14,7 @@ export const metadata: Metadata = {
   keywords: ['botanical studio', 'intentional living', 'faith', 'mindfulness', 'coffee table books', 'declarations series', 'women empowerment', 'spiritual growth'],
   authors: [{ name: 'Hilary Williamson' }],
   creator: 'Hilary Williamson',
-  metadataBase: new URL('https://thefaithfulmindset.com'),
+  metadataBase: siteOrigin,
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -20,7 +24,7 @@ export const metadata: Metadata = {
     description: 'A botanical creative studio that inspires women to live on purpose through small intentional change.',
     images: [
       {
-        url: '/assets/marketing/Marketing /Website Portrait.png',
+        url: siteImages.aboutPortrait,
         width: 1200,
         height: 630,
         alt: 'The Faithful Mindset - Hilary Williamson',
@@ -31,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Faithful Mindset - A Botanical Creative Studio',
     description: 'A botanical creative studio that inspires women to live on purpose through small intentional change.',
-    images: ['/assets/marketing/Marketing /Website Portrait.png'],
+    images: [siteImages.aboutPortrait],
     creator: '@faithfulmindset',
   },
   robots: {
@@ -55,9 +59,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const showPlacementGrid = process.env.NODE_ENV !== 'production'
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        {showPlacementGrid && <PlacementGridOverlay />}
+      </body>
     </html>
   )
 }

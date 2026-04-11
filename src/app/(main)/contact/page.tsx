@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { NewsletterSubscribe } from '@/components/NewsletterSubscribe'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,11 +10,41 @@ export default function Contact() {
     email: '',
     message: '',
   })
+  const [contactStatus, setContactStatus] = useState<
+    'idle' | 'loading' | 'success' | 'error'
+  >('idle')
+  const [contactMessage, setContactMessage] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Form submission logic will be added later
-    console.log('Form submitted:', formData)
+    setContactStatus('loading')
+    setContactMessage('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      })
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean
+        error?: string
+      }
+      if (!res.ok) {
+        throw new Error(data.error ?? 'Could not send your message.')
+      }
+      setContactStatus('success')
+      setContactMessage('Thank you. We will get back to you soon.')
+      setFormData({ name: '', email: '', message: '' })
+    } catch (err) {
+      setContactStatus('error')
+      setContactMessage(
+        err instanceof Error ? err.message : 'Please try again.'
+      )
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -88,7 +119,8 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-brand-pink"
+                    disabled={contactStatus === 'loading'}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-brand-pink disabled:opacity-60"
                   />
                 </div>
                 
@@ -103,7 +135,8 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-brand-pink"
+                    disabled={contactStatus === 'loading'}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-brand-pink disabled:opacity-60"
                   />
                 </div>
                 
@@ -118,18 +151,27 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-brand-pink resize-none"
+                    disabled={contactStatus === 'loading'}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-brand-pink resize-none disabled:opacity-60"
                   />
                 </div>
                 
                 <motion.button
                   type="submit"
-                  className="w-full px-8 py-3 bg-gradient-to-r from-brand-pink to-pink-600 text-white rounded-full shadow-lg"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={contactStatus === 'loading'}
+                  className="w-full px-8 py-3 bg-gradient-to-r from-brand-pink to-pink-600 text-white rounded-full shadow-lg disabled:opacity-60"
+                  whileHover={{ scale: contactStatus === 'loading' ? 1 : 1.02 }}
+                  whileTap={{ scale: contactStatus === 'loading' ? 1 : 0.98 }}
                 >
-                  Send Message
+                  {contactStatus === 'loading' ? 'Sending…' : 'Send Message'}
                 </motion.button>
+                {contactMessage ? (
+                  <p
+                    className={`text-sm ${contactStatus === 'success' ? 'text-green-700' : 'text-red-600'}`}
+                  >
+                    {contactMessage}
+                  </p>
+                ) : null}
               </form>
               
               <div className="mt-8 pt-8 border-t border-pink-100">
@@ -160,41 +202,7 @@ export default function Contact() {
                   Join our community and receive thoughtful reflections on intentional living, updates on new products, and early access to courses.
                 </p>
                 
-                <form className="space-y-4">
-                  <div>
-                    <label htmlFor="newsletter-name" className="block text-sm font-medium text-brand-charcoal mb-2">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="newsletter-name"
-                      name="newsletter-name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-brand-pink bg-white"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="newsletter-email" className="block text-sm font-medium text-brand-charcoal mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="newsletter-email"
-                      name="newsletter-email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-sm focus:outline-none focus:border-brand-pink bg-white"
-                    />
-                  </div>
-                  
-                  <motion.button
-                    type="submit"
-                    className="w-full px-8 py-3 bg-gradient-to-r from-brand-pink to-pink-600 text-white rounded-full shadow-lg"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Subscribe
-                  </motion.button>
-                </form>
+                <NewsletterSubscribe variant="contact" source="contact" />
                 
                 <p className="text-xs text-brand-charcoal/60 mt-4">
                   We respect your privacy. Unsubscribe at any time.

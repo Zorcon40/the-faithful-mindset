@@ -3,30 +3,31 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { bookCoverSlug, siteImages } from '@/lib/siteImages'
 
 const galleryImages = [
   {
-    src: '/assets/marketing/Marketing /White_dahlia_hero_bloom.png',
+    src: siteImages.heroDahlia,
     alt: 'White Dahlia',
     caption: 'Purity & New Beginnings',
   },
   {
-    src: '/assets/marketing/Marketing /Book 1 - Faith PNG.png',
+    src: siteImages.bookCover(bookCoverSlug.faith),
     alt: 'Pink Flowers',
     caption: 'Faith & Grace',
   },
   {
-    src: '/assets/marketing/Marketing /Book 2 - Strength PNG.png',
+    src: siteImages.bookCover(bookCoverSlug.strength),
     alt: 'Purple Flowers',
     caption: 'Strength & Courage',
   },
   {
-    src: '/assets/marketing/Marketing /Book 3 - Gratitude PNG.png',
+    src: siteImages.bookCover(bookCoverSlug.gratitude),
     alt: 'Orange Flowers',
     caption: 'Gratitude & Joy',
   },
   {
-    src: '/assets/marketing/Marketing /Book 4 - Joy PNG.png',
+    src: siteImages.bookCover(bookCoverSlug.joy),
     alt: 'Yellow Flowers',
     caption: 'Joy & Celebration',
   },

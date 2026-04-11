@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { siteImages } from '@/lib/siteImages'
 import { motion } from 'framer-motion'
 
 export default function About() {
@@ -65,7 +66,7 @@ export default function About() {
                 whileHover={{ scale: 1.02 }}
               >
                 <Image
-                  src="/assets/marketing/Marketing /Website Portrait.png"
+                  src={siteImages.aboutPortrait}
                   alt="Hilary Williamson"
                   fill
                   className="object-cover"

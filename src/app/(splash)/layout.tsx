@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-const splashOgImage = '/assets/marketing/Marketing /Website Portrait.png'
+const splashOgImage = '/The%20Garden/Enter%20the%20Garden.png'
 
 export const metadata: Metadata = {
   title: 'Welcome',

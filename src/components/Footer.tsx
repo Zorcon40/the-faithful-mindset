@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Instagram, Facebook, Mail, Heart } from 'lucide-react'
+import { NewsletterSubscribe } from '@/components/NewsletterSubscribe'
 
 export default function Footer() {
   const navLinks = [
@@ -39,19 +40,7 @@ export default function Footer() {
             {/* Newsletter */}
             <div className="max-w-sm">
               <p className="text-sm font-medium text-brand-charcoal mb-3">Join our community</p>
-              <form className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 px-4 py-2 border border-pink-200 rounded-full text-sm focus:outline-none focus:border-brand-pink"
-                />
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-brand-pink text-white rounded-full text-sm font-medium hover:bg-pink-700 transition-colors"
-                >
-                  Subscribe
-                </button>
-              </form>
+              <NewsletterSubscribe variant="footer" source="footer" />
             </div>
           </motion.div>
 

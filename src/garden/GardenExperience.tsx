@@ -2,28 +2,67 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { ArrowLeft } from 'lucide-react'
+import { declarationsBooks } from '@/data/declarationsBooks'
+import { layers } from '@/lib/layers'
+import { siteImages } from '@/lib/siteImages'
+import { routeForWalkStep, walkRoutes } from './walkRouteModel'
 import {
-  gateClosedImage,
-  gateOpenImage,
-  insideGardenScene,
+  entrywayImage,
+  porchImage,
+  walkthroughSteps,
+  type WalkStep,
 } from './scenes'
 
-type View = 'closed' | 'transition' | 'inside'
+type Mode = 'scene' | 'transition'
 
-const TRANSITION_MS = 2800
+const TRANSITION_MS = 2400
 
-export function GardenExperience() {
+/**
+ * Vertical slice below the fixed header stack. Reuse anywhere we position overlays with
+ * `%` / `top` / `left` — the scene root must not collapse to zero height when every child
+ * is `position:absolute` (e.g. `Image fill`), or controls pin to the top-left corner.
+ */
+const SCENE_VIEWPORT_MIN =
+  'min-h-[calc(100dvh-var(--site-nav-height)-var(--garden-subnav-height)-env(safe-area-inset-top,0px))]'
+
+const PORCH_BUTTON_ANCHOR = { x: 50, y: 40 } as const
+
+const headerControlClass =
+  'inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/35 px-3 py-2 text-sm font-medium text-white/95 shadow-sm backdrop-blur-md transition hover:border-white/45 hover:bg-black/45 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
+
+const hitAreaClass =
+  'absolute cursor-pointer border-0 bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
+
+const sceneActionBtnClass =
+  'rounded-full border border-white/40 bg-black/45 px-5 py-2.5 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition hover:bg-black/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300'
+
+const porchEnterClass =
+  'rounded-full bg-white px-10 py-3.5 text-sm font-bold tracking-wide text-stone-900 shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-2 ring-stone-900/20 transition hover:bg-stone-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-4 focus-visible:ring-offset-stone-900/50'
+
+function stepIndexById(id: string) {
+  return walkthroughSteps.findIndex((s) => s.id === id)
+}
+
+function clampStep(index: number) {
+  const max = walkthroughSteps.length - 1
+  return Math.max(0, Math.min(max, index))
+}
+
+export function GardenExperience({
+  initialStep = 0,
+}: {
+  initialStep?: number
+}) {
+  const router = useRouter()
   const reduceMotion = useReducedMotion()
-  const [view, setView] = useState<View>('closed')
-  const [activeHotspotId, setActiveHotspotId] = useState<string | null>(null)
-  const dialogRef = useRef<HTMLDialogElement>(null)
+  const [mode, setMode] = useState<Mode>('scene')
+  const [stepIndex, setStepIndex] = useState(() => clampStep(initialStep))
+  const headerRef = useRef<HTMLElement | null>(null)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const goInside = useCallback(() => {
-    setView('inside')
-  }, [])
 
   const clearTimer = () => {
     if (timerRef.current) {
@@ -32,227 +71,460 @@ export function GardenExperience() {
     }
   }
 
-  const startOpening = () => {
+  useEffect(() => {
+    clearTimer()
+    setMode('scene')
+    setStepIndex(clampStep(initialStep))
+  }, [initialStep])
+
+  useEffect(() => {
+    const element = headerRef.current
+    if (!element) return
+
+    const setHeight = () => {
+      document.documentElement.style.setProperty(
+        '--garden-subnav-height',
+        `${element.offsetHeight}px`,
+      )
+    }
+
+    setHeight()
+    const observer = new ResizeObserver(setHeight)
+    observer.observe(element)
+    window.addEventListener('resize', setHeight)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', setHeight)
+    }
+  }, [])
+
+  const step = walkthroughSteps[stepIndex]
+  const isLast = stepIndex >= walkthroughSteps.length - 1
+  const greatRoomIndex = stepIndexById('greatRoom')
+  const bouquetIndex = stepIndexById('bouquet')
+  const openDoorIndex = stepIndexById('openDoor')
+
+  const goToIndex = useCallback(
+    (index: number) => {
+      clearTimer()
+      setMode('scene')
+      const next = clampStep(index)
+      setStepIndex(next)
+      router.replace(routeForWalkStep(next))
+    },
+    [router],
+  )
+
+  const startEnterHouse = () => {
     clearTimer()
     if (reduceMotion) {
-      goInside()
+      goToIndex(1)
       return
     }
-    setView('transition')
+    setMode('transition')
     timerRef.current = setTimeout(() => {
-      goInside()
       timerRef.current = null
+      goToIndex(1)
     }, TRANSITION_MS)
   }
 
   const skipTransition = () => {
     clearTimer()
-    goInside()
+    goToIndex(1)
+  }
+
+  const goNext = () => {
+    if (stepIndex === 0 && walkthroughSteps[0].useEnterTransition) {
+      startEnterHouse()
+      return
+    }
+    if (!isLast) goToIndex(stepIndex + 1)
   }
 
   useEffect(() => () => clearTimer(), [])
 
-  const activeHotspot = insideGardenScene.hotspots.find(
-    (h) => h.id === activeHotspotId
-  )
-
-  useEffect(() => {
-    const el = dialogRef.current
-    if (!el) return
-    if (activeHotspot) {
-      el.showModal()
-      queueMicrotask(() => {
-        el.querySelector<HTMLButtonElement>('button')?.focus()
-      })
-    } else {
-      el.close()
+  const goBack = () => {
+    clearTimer()
+    if (mode === 'transition') {
+      setMode('scene')
+      setStepIndex(0)
+      router.replace(walkRoutes.porch)
+      return
     }
-  }, [activeHotspot])
+    if (stepIndex > 0) goToIndex(stepIndex - 1)
+  }
+
+  const headerBack =
+    mode === 'transition' ? (
+      <button type="button" onClick={goBack} className={headerControlClass}>
+        <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
+        Back
+      </button>
+    ) : stepIndex === 0 ? (
+      <Link href="/" className={headerControlClass}>
+        <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
+        Back
+      </Link>
+    ) : (
+      <button type="button" onClick={goBack} className={headerControlClass}>
+        <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
+        Back
+      </button>
+    )
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-950 via-stone-900 to-stone-950 text-stone-100">
-      <header className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between gap-3 border-b border-white/10 bg-stone-950/80 px-4 py-3 backdrop-blur-md">
-        <Link
-          href="/home"
-          className="text-sm font-medium text-amber-100/90 underline-offset-4 hover:underline"
-        >
-          Exit to site
-        </Link>
-        <span className="text-center text-xs text-stone-400">
-          Concept — no progress saved
-        </span>
-        <a
-          href="/garden"
-          className="text-sm font-medium text-emerald-200/90 underline-offset-4 hover:underline"
-        >
-          Start over
-        </a>
+    <div className="min-h-screen bg-stone-950 text-stone-100">
+      <header
+        ref={headerRef}
+        className={`fixed left-0 right-0 top-[var(--site-nav-height)] ${layers.gardenSubHeader} flex items-center justify-between gap-3 border-b border-white/15 bg-stone-950/92 px-4 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] shadow-[0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md`}
+      >
+        {headerBack}
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          <Link href="/home" className={headerControlClass}>
+            Exit to site
+          </Link>
+        </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-4 pb-16 pt-20">
+      <main className="flex min-h-[100dvh] flex-col pt-[calc(var(--site-nav-height)+var(--garden-subnav-height)+env(safe-area-inset-top,0px))]">
         <AnimatePresence mode="wait">
-          {view === 'closed' && (
-            <motion.section
-              key="closed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="relative"
-            >
-              <p className="mb-4 text-center text-sm text-stone-400">
-                The gate is closed. (Placeholder art — swap in house &amp; garden.)
-              </p>
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-xl">
-                <Image
-                  src={gateClosedImage}
-                  alt="Garden gate — concept placeholder"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <div className="mt-8 flex justify-center">
-                <button
-                  type="button"
-                  onClick={startOpening}
-                  className="rounded-full bg-emerald-600 px-8 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"
-                >
-                  Open the gate
-                </button>
-              </div>
-            </motion.section>
-          )}
-
-          {view === 'transition' && (
+          {mode === 'transition' && (
             <motion.section
               key="transition"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="relative"
+              className={`relative flex ${SCENE_VIEWPORT_MIN} flex-1 flex-col pointer-events-auto`}
             >
-              <div className="mb-3 flex items-center justify-between gap-2">
-                <p className="text-sm text-stone-400">Stepping into the garden…</p>
+              <div
+                className={`absolute left-0 right-0 top-3 ${layers.sceneForeground} flex items-center justify-end gap-2 px-4 pt-[env(safe-area-inset-top,0px)] sm:top-4`}
+              >
                 <button
                   type="button"
                   onClick={skipTransition}
-                  className="rounded-full border border-amber-300/50 px-4 py-1.5 text-xs font-medium text-amber-100 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"
+                  className={headerControlClass}
                 >
                   Skip
                 </button>
               </div>
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-xl">
+              <div
+                className={`relative flex-1 w-full overflow-hidden ${SCENE_VIEWPORT_MIN}`}
+              >
                 <motion.div
-                  className="absolute inset-0"
+                  className="pointer-events-none absolute inset-0 z-0"
                   initial={{ opacity: 1 }}
                   animate={{ opacity: 0 }}
-                  transition={{ duration: TRANSITION_MS / 1000, ease: 'easeInOut' }}
+                  transition={{
+                    duration: TRANSITION_MS / 1000,
+                    ease: 'easeInOut',
+                  }}
                 >
                   <Image
-                    src={gateClosedImage}
+                    src={porchImage}
                     alt=""
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
                     aria-hidden
                   />
                 </motion.div>
                 <motion.div
-                  className="absolute inset-0"
+                  className="pointer-events-none absolute inset-0 z-0"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: TRANSITION_MS / 1000, ease: 'easeInOut' }}
+                  transition={{
+                    duration: TRANSITION_MS / 1000,
+                    ease: 'easeInOut',
+                  }}
                 >
                   <Image
-                    src={gateOpenImage}
-                    alt="Garden beyond the gate — concept"
+                    src={entrywayImage}
+                    alt={walkthroughSteps[1].alt}
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
                   />
                 </motion.div>
               </div>
             </motion.section>
           )}
 
-          {view === 'inside' && (
+          {mode === 'scene' && (
             <motion.section
-              key="inside"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="relative"
+              key={step.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className={`relative flex ${SCENE_VIEWPORT_MIN} flex-1 flex-col pointer-events-auto`}
             >
-              <p className="mb-4 text-center text-sm text-stone-400">
-                Click a highlighted area (or Tab + Enter) to explore.
-              </p>
-              <div
-                className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-xl"
-                role="group"
-                aria-label="Interactive garden scene. Tab between highlights; press Enter or Space to open."
+              <p
+                className={`pointer-events-none absolute left-0 right-0 top-14 ${layers.sceneOverlay} px-4 text-center text-xs text-white drop-shadow-md sm:top-16 sm:text-sm`}
               >
-                <Image
-                  src={insideGardenScene.imageSrc}
-                  alt={insideGardenScene.imageAlt}
-                  fill
-                  className="object-contain bg-stone-900"
-                  priority
+                {step.hint}
+              </p>
+
+              {step.layout === 'greatRoom' ? (
+                <GreatRoomScene
+                  step={step}
+                  bouquetIndex={bouquetIndex}
+                  openDoorIndex={openDoorIndex}
+                  goToIndex={goToIndex}
+                  goNext={goNext}
+                  isLast={isLast}
                 />
-                {insideGardenScene.hotspots.map((h) => (
-                  <button
-                    key={h.id}
-                    type="button"
-                    aria-label={h.label}
-                    className="absolute rounded-lg border-2 border-amber-400/70 bg-amber-400/15 transition hover:bg-amber-300/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-900"
-                    style={{
-                      left: `${h.x}%`,
-                      top: `${h.y}%`,
-                      width: `${h.w}%`,
-                      height: `${h.h}%`,
-                    }}
-                    onClick={() => setActiveHotspotId(h.id)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        setActiveHotspotId(h.id)
-                      }
-                    }}
-                  />
-                ))}
-              </div>
+              ) : (
+                <GenericScene
+                  step={step}
+                  stepIndex={stepIndex}
+                  greatRoomIndex={greatRoomIndex}
+                  goToIndex={goToIndex}
+                  goNext={goNext}
+                  isLast={isLast}
+                />
+              )}
             </motion.section>
           )}
         </AnimatePresence>
       </main>
-
-      <dialog
-        ref={dialogRef}
-        aria-labelledby={activeHotspot ? 'garden-hotspot-title' : undefined}
-        aria-describedby={activeHotspot ? 'garden-hotspot-body' : undefined}
-        className="max-w-md rounded-2xl border border-stone-600 bg-stone-900 p-6 text-stone-100 shadow-2xl backdrop:bg-black/60"
-        onClose={() => setActiveHotspotId(null)}
-      >
-        {activeHotspot && (
-          <div>
-            <h2
-              id="garden-hotspot-title"
-              className="font-script text-2xl text-amber-100"
-            >
-              {activeHotspot.title}
-            </h2>
-            <p
-              id="garden-hotspot-body"
-              className="mt-3 text-sm leading-relaxed text-stone-300"
-            >
-              {activeHotspot.body}
-            </p>
-            <button
-              type="button"
-              className="mt-6 w-full rounded-full bg-emerald-700 py-2.5 text-sm font-medium text-white hover:bg-emerald-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"
-              onClick={() => setActiveHotspotId(null)}
-            >
-              Close
-            </button>
-          </div>
-        )}
-      </dialog>
     </div>
+  )
+}
+
+function GenericScene({
+  step,
+  stepIndex,
+  greatRoomIndex,
+  goToIndex,
+  goNext,
+  isLast,
+}: {
+  step: WalkStep
+  stepIndex: number
+  greatRoomIndex: number
+  goToIndex: (index: number) => void
+  goNext: () => void
+  isLast: boolean
+}) {
+  return (
+    <div className={`relative z-0 flex-1 w-full ${SCENE_VIEWPORT_MIN}`}>
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <Image
+          src={step.src}
+          alt={step.alt}
+          fill
+          className="object-cover object-center"
+          priority={stepIndex === 0}
+          sizes="100vw"
+        />
+      </div>
+
+      {step.id === 'entryway' && greatRoomIndex >= 0 && (
+        <button
+          type="button"
+          aria-label="Continue to the great room — right side of the photo"
+          className={`${hitAreaClass} ${layers.sceneHitArea} top-0 h-full min-h-[120px]`}
+          style={{ left: '68.5%', width: '31.5%' }}
+          onClick={() => goToIndex(greatRoomIndex)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              goToIndex(greatRoomIndex)
+            }
+          }}
+        />
+      )}
+
+      {stepIndex === 0 && (
+        <button
+          type="button"
+          onClick={goNext}
+          className={`absolute ${layers.sceneOverlay} -translate-x-1/2 -translate-y-1/2 ${porchEnterClass}`}
+          style={{
+            left: `${PORCH_BUTTON_ANCHOR.x}%`,
+            top: `${PORCH_BUTTON_ANCHOR.y}%`,
+          }}
+        >
+          Enter the house
+        </button>
+      )}
+
+      {stepIndex !== 0 && (
+        <div
+          className={`pointer-events-none absolute inset-x-0 bottom-0 ${layers.sceneOverlay} flex justify-center px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-16`}
+        >
+          <div className="pointer-events-auto flex flex-wrap justify-center gap-3">
+            {isLast ? (
+              <Link
+                href="/home"
+                className={`${sceneActionBtnClass} bg-gradient-to-r from-brand-pink to-pink-600 border-transparent`}
+              >
+                Explore the site
+              </Link>
+            ) : (
+              <button type="button" onClick={goNext} className={sceneActionBtnClass}>
+                Next
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function GreatRoomScene({
+  step,
+  bouquetIndex,
+  openDoorIndex,
+  goToIndex,
+  goNext,
+  isLast,
+}: {
+  step: WalkStep
+  bouquetIndex: number
+  openDoorIndex: number
+  goToIndex: (i: number) => void
+  goNext: () => void
+  isLast: boolean
+}) {
+  return (
+    <>
+      <div
+        className={`pointer-events-none absolute left-0 right-0 top-24 ${layers.sceneOverlay} flex flex-wrap justify-center gap-2 px-4 sm:top-28`}
+      >
+        <button
+          type="button"
+          onClick={() => goToIndex(bouquetIndex)}
+          className={`${sceneActionBtnClass} pointer-events-auto`}
+        >
+          View flowers
+        </button>
+        <button
+          type="button"
+          onClick={() => goToIndex(openDoorIndex)}
+          className={`${sceneActionBtnClass} pointer-events-auto`}
+        >
+          View garden
+        </button>
+      </div>
+
+      <div
+        className={`relative z-0 flex-1 w-full ${SCENE_VIEWPORT_MIN}`}
+        role="group"
+        aria-label="Great room"
+      >
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <Image
+            src={step.src}
+            alt={step.alt}
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+        <button
+          type="button"
+          aria-label="View the flowers on the coffee table"
+          className={`${hitAreaClass} ${layers.sceneHitArea}`}
+          style={{
+            left: '28%',
+            top: '42%',
+            width: '30%',
+            height: '36%',
+          }}
+          onClick={() => goToIndex(bouquetIndex)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              goToIndex(bouquetIndex)
+            }
+          }}
+        />
+        <button
+          type="button"
+          aria-label="View through the doors to the garden"
+          className={`${hitAreaClass} ${layers.sceneHitArea}`}
+          style={{
+            left: '60%',
+            top: '14%',
+            width: '38%',
+            height: '80%',
+          }}
+          onClick={() => goToIndex(openDoorIndex)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              goToIndex(openDoorIndex)
+            }
+          }}
+        />
+
+        <div
+          className={`pointer-events-none absolute bottom-0 left-0 right-0 ${layers.sceneForeground} bg-gradient-to-t from-black/90 via-black/55 to-transparent px-3 pt-10 pb-[max(0.75rem,env(safe-area-inset-bottom))]`}
+          role="region"
+          aria-label="Declarations book series"
+        >
+          <div className="pointer-events-auto mb-3 flex justify-center">
+            {isLast ? (
+              <Link
+                href="/home"
+                className={`${sceneActionBtnClass} bg-gradient-to-r from-brand-pink to-pink-600 border-transparent`}
+              >
+                Explore the site
+              </Link>
+            ) : (
+              <button type="button" onClick={goNext} className={sceneActionBtnClass}>
+                Next in tour
+              </button>
+            )}
+          </div>
+          <p className="mb-2 text-center text-[10px] font-medium uppercase tracking-wide text-white/75 sm:text-xs">
+            Garden of Declarations
+          </p>
+          <div className="pointer-events-auto flex gap-3 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {declarationsBooks.map((book) => {
+              const src = siteImages.studioBookPng(book.id, book.name)
+              const label = `Declarations of ${book.name}`
+              const inner = (
+                <>
+                  <div className="relative h-[88px] w-[62px] overflow-hidden rounded-sm shadow-lg ring-1 ring-white/20 sm:h-[100px] sm:w-[70px]">
+                    <Image
+                      src={src}
+                      alt={label}
+                      fill
+                      className={
+                        book.available
+                          ? 'object-cover'
+                          : 'object-cover grayscale opacity-60'
+                      }
+                      sizes="70px"
+                    />
+                  </div>
+                  <span className="mt-1 block max-w-[4.5rem] truncate text-center text-[9px] leading-tight text-white/90 sm:max-w-[4.75rem] sm:text-[10px]">
+                    {book.available ? book.name : `${book.name} · soon`}
+                  </span>
+                </>
+              )
+              return book.available ? (
+                <Link
+                  key={book.id}
+                  href="/studio-collection"
+                  className="flex shrink-0 flex-col items-center rounded-md p-1 outline-none transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-amber-300"
+                  aria-label={`${label} — open studio collection`}
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <div
+                  key={book.id}
+                  className="flex shrink-0 flex-col items-center p-1 opacity-90"
+                  aria-label={`${label} — coming soon`}
+                >
+                  {inner}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </>
   )
 }

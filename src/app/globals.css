@@ -7,6 +7,8 @@
 :root {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-script: 'Dancing Script', cursive;
+  --site-nav-height: 9rem;
+  --garden-subnav-height: 3.5rem;
 }
 
 * {

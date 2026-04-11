@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { GardenNavShell } from './GardenNavShell'
 
 export const metadata: Metadata = {
   title: 'Garden',
@@ -11,5 +12,10 @@ export default function GardenLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return (
+    <>
+      <GardenNavShell />
+      {children}
+    </>
+  )
 }

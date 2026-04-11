@@ -3,54 +3,51 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { entranceSplashImage } from '@/garden/scenes'
+
+const glassBtn =
+  'flex min-h-[52px] min-w-[200px] items-center justify-center rounded-full border border-white/40 bg-white/15 px-8 py-3.5 text-center text-base font-semibold text-white shadow-lg backdrop-blur-md transition hover:bg-white/25 hover:border-white/55 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
 
 export default function SplashPage() {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-stone-900">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-100/15 via-transparent to-transparent" />
+    <div className="relative min-h-screen min-h-[100dvh] w-full overflow-hidden bg-stone-900">
       <Image
-        src="/assets/marketing/Marketing /White_dahlia_hero_bloom.png"
-        alt=""
+        src={entranceSplashImage}
+        alt="White farmhouse viewed through open iron gates, stone path to the front porch"
         fill
-        className="object-cover opacity-25 mix-blend-soft-light"
+        className="z-0 object-cover object-center"
         priority
+        sizes="100vw"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] bg-black/20"
         aria-hidden
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-900/40 to-emerald-950/60" />
 
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-end pb-10 pt-24 md:justify-center md:pb-24">
+      {/* Centered overlay: title + glass CTAs */}
+      <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-6 py-16">
         <motion.div
-          className="mb-10 max-w-lg px-6 text-center md:mb-14"
-          initial={{ opacity: 0, y: 16 }}
+          className="pointer-events-auto flex max-w-lg flex-col items-center gap-8 text-center sm:max-w-2xl"
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
         >
-          <p className="font-script text-3xl text-amber-100/90 md:text-4xl">
-            The Faithful Mindset
-          </p>
-          <p className="mt-3 text-sm text-stone-300 md:text-base">
-            Concept splash — replace art with your house &amp; garden illustration.
-          </p>
-        </motion.div>
+          <div>
+            <p className="font-script text-3xl text-white drop-shadow-lg sm:text-4xl md:text-5xl">
+              The Faithful Mindset
+            </p>
+            <p className="mx-auto mt-3 max-w-md text-sm text-white/95 drop-shadow-md">
+              Walk the grounds — or head straight to the studio site.
+            </p>
+          </div>
 
-        <motion.div
-          className="flex w-full max-w-2xl flex-col gap-4 px-6 sm:flex-row sm:justify-center sm:gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
-          <Link
-            href="/garden"
-            className="flex min-h-[52px] flex-1 items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-800/40 px-8 py-4 text-center text-base font-medium text-emerald-50 backdrop-blur-sm transition hover:border-amber-200/50 hover:bg-emerald-700/50"
-          >
-            Enter the garden
-          </Link>
-          <Link
-            href="/home"
-            className="flex min-h-[52px] flex-1 items-center justify-center rounded-full border border-amber-200/30 bg-amber-950/40 px-8 py-4 text-center text-base font-medium text-amber-50 backdrop-blur-sm transition hover:border-amber-100/60 hover:bg-amber-900/50"
-          >
-            Enter the site
-          </Link>
+          <div className="flex w-full flex-col gap-3 sm:flex-row sm:justify-center sm:gap-5">
+            <Link href="/garden/porch" className={glassBtn}>
+              Enter the Garden
+            </Link>
+            <Link href="/home" className={glassBtn}>
+              Enter the Site
+            </Link>
+          </div>
         </motion.div>
       </div>
     </div>

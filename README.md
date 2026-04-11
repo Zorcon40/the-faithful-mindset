@@ -125,7 +125,22 @@ npm start
 
 ### Development Server
 
-Open [http://localhost:3000](http://localhost:3000) to view the website.
+Open [http://localhost:3030](http://localhost:3030) to view the website.
+
+If local chunks or HMR become unstable:
+
+```bash
+npm run clean:all
+npm run dev
+```
+
+Before merge:
+
+```bash
+npm run verify
+```
+
+See `docs/DEV_WORKFLOW.md` and `docs/GARDEN_REGRESSION_CHECKLIST.md` for the full checklist.
 
 ## Project Structure
 

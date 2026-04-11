@@ -2,7 +2,7 @@
 
 ## ✅ Project Status: Complete & Running
 
-The website is fully built and running at **http://localhost:3000**
+The website is fully built and running at **http://localhost:3030**
 
 ## What Was Built
 
@@ -204,7 +204,7 @@ The website is configured for Netlify deployment:
 **Development:**
 ```bash
 npm run dev
-# Opens at http://localhost:3000
+# Opens at http://localhost:3030
 ```
 
 **Production Build:**
@@ -266,5 +266,5 @@ Once live, monitor:
 
 **Built:** March 2026  
 **Status:** ✅ Complete and running  
-**URL:** http://localhost:3000 (development)  
+**URL:** http://localhost:3030 (development)  
 **Production URL:** www.thefaithfulmindset.com (pending deployment)

@@ -2,15 +2,18 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { siteImages } from '@/lib/siteImages'
 import { usePathname } from 'next/navigation'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { layers } from '@/lib/layers'
 
 export default function Navigation() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const { scrollY } = useScroll()
   const navOpacity = useTransform(scrollY, [0, 100], [0.95, 1])
+  const navRef = useRef<HTMLElement | null>(null)
   
   const navItems = [
     { name: 'Home', href: '/home' },
@@ -30,9 +33,31 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const element = navRef.current
+    if (!element) return
+
+    const setHeight = () => {
+      document.documentElement.style.setProperty(
+        '--site-nav-height',
+        `${element.offsetHeight}px`,
+      )
+    }
+
+    setHeight()
+    const observer = new ResizeObserver(setHeight)
+    observer.observe(element)
+    window.addEventListener('resize', setHeight)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', setHeight)
+    }
+  }, [])
+
   return (
     <motion.nav 
-      className={`w-full fixed top-0 z-50 transition-all duration-300 ${
+      ref={navRef}
+      className={`w-full fixed top-0 ${layers.appChrome} transition-all duration-300 ${
         isScrolled ? 'glass-effect shadow-lg' : 'bg-white/80 backdrop-blur-sm'
       }`}
       style={{ opacity: navOpacity }}
@@ -48,7 +73,7 @@ export default function Navigation() {
           >
             <Link href="/home" className="flex items-center">
               <Image
-                src="/assets/marketing/Marketing /The_Faithful_Mindset_Logo.png"
+                src={siteImages.logo}
                 alt="The Faithful Mindset"
                 width={60}
                 height={60}
