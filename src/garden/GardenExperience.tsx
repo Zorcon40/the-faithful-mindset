@@ -5,10 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowLeft } from 'lucide-react'
-import { declarationsBooks } from '@/data/declarationsBooks'
+import { ArrowLeft, Home } from 'lucide-react'
 import { layers } from '@/lib/layers'
-import { siteImages } from '@/lib/siteImages'
 import { routeForWalkStep, walkRoutes } from './walkRouteModel'
 import {
   entrywayImage,
@@ -42,6 +40,13 @@ const sceneActionBtnClass =
 
 const porchEnterClass =
   'rounded-full bg-white px-10 py-3.5 text-sm font-bold tracking-wide text-stone-900 shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-2 ring-stone-900/20 transition hover:bg-stone-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-4 focus-visible:ring-offset-stone-900/50'
+
+/** Fixed top-left of viewport, stacked above main nav (z-120) */
+const cornerNavClass =
+  'fixed left-[max(1rem,env(safe-area-inset-left,0px))] top-[max(1rem,env(safe-area-inset-top,0px))] z-[130] flex flex-row flex-wrap items-center gap-2'
+
+const cornerBtnClass =
+  'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-white/40 bg-black/40 px-3.5 py-2.5 text-sm font-medium text-white shadow-md backdrop-blur-md transition hover:border-white/55 hover:bg-black/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
 
 function stepIndexById(id: string) {
   return walkthroughSteps.findIndex((s) => s.id === id)
@@ -154,36 +159,30 @@ export function GardenExperience({
     if (stepIndex > 0) goToIndex(stepIndex - 1)
   }
 
-  const headerBack =
-    mode === 'transition' ? (
-      <button type="button" onClick={goBack} className={headerControlClass}>
-        <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
-        Back
-      </button>
-    ) : stepIndex === 0 ? (
-      <Link href="/" className={headerControlClass}>
-        <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
-        Back
-      </Link>
-    ) : (
-      <button type="button" onClick={goBack} className={headerControlClass}>
-        <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
-        Back
-      </button>
-    )
+  const showCornerBack = mode === 'transition' || stepIndex > 0
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100">
+      <nav className={cornerNavClass} aria-label="Garden walk navigation">
+        <Link href="/" className={cornerBtnClass}>
+          <Home className="h-4 w-4 shrink-0" aria-hidden />
+          Home
+        </Link>
+        {showCornerBack ? (
+          <button type="button" onClick={goBack} className={cornerBtnClass} aria-label="Previous scene">
+            <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
+            Back
+          </button>
+        ) : null}
+      </nav>
+
       <header
         ref={headerRef}
-        className={`fixed left-0 right-0 top-[var(--site-nav-height)] ${layers.gardenSubHeader} flex items-center justify-between gap-3 border-b border-white/15 bg-stone-950/92 px-4 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] shadow-[0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md`}
+        className={`fixed left-0 right-0 top-[var(--site-nav-height)] ${layers.gardenSubHeader} flex items-center justify-end gap-3 border-b border-white/15 bg-stone-950/92 px-4 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] shadow-[0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md`}
       >
-        {headerBack}
-        <div className="flex flex-wrap items-center justify-end gap-2">
-          <Link href="/home" className={headerControlClass}>
-            Exit to site
-          </Link>
-        </div>
+        <Link href="/home" className={headerControlClass}>
+          Exit to site
+        </Link>
       </header>
 
       <main className="flex min-h-[100dvh] flex-col pt-[calc(var(--site-nav-height)+var(--garden-subnav-height)+env(safe-area-inset-top,0px))]">
@@ -255,12 +254,6 @@ export function GardenExperience({
               exit={{ opacity: 0 }}
               className={`relative flex ${SCENE_VIEWPORT_MIN} flex-1 flex-col pointer-events-auto`}
             >
-              <p
-                className={`pointer-events-none absolute left-0 right-0 top-14 ${layers.sceneOverlay} px-4 text-center text-xs text-white drop-shadow-md sm:top-16 sm:text-sm`}
-              >
-                {step.hint}
-              </p>
-
               {step.layout === 'greatRoom' ? (
                 <GreatRoomScene
                   step={step}
@@ -458,11 +451,11 @@ function GreatRoomScene({
         />
 
         <div
-          className={`pointer-events-none absolute bottom-0 left-0 right-0 ${layers.sceneForeground} bg-gradient-to-t from-black/90 via-black/55 to-transparent px-3 pt-10 pb-[max(0.75rem,env(safe-area-inset-bottom))]`}
+          className={`pointer-events-none absolute bottom-0 left-0 right-0 ${layers.sceneForeground} bg-gradient-to-t from-black/80 via-black/40 to-transparent px-3 pt-8`}
           role="region"
-          aria-label="Declarations book series"
+          aria-label="Tour controls"
         >
-          <div className="pointer-events-auto mb-3 flex justify-center">
+          <div className="pointer-events-auto flex justify-center pb-[max(0.75rem,env(safe-area-inset-bottom))]">
             {isLast ? (
               <Link
                 href="/home"
@@ -475,53 +468,6 @@ function GreatRoomScene({
                 Next in tour
               </button>
             )}
-          </div>
-          <p className="mb-2 text-center text-[10px] font-medium uppercase tracking-wide text-white/75 sm:text-xs">
-            Garden of Declarations
-          </p>
-          <div className="pointer-events-auto flex gap-3 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {declarationsBooks.map((book) => {
-              const src = siteImages.studioBookPng(book.id, book.name)
-              const label = `Declarations of ${book.name}`
-              const inner = (
-                <>
-                  <div className="relative h-[88px] w-[62px] overflow-hidden rounded-sm shadow-lg ring-1 ring-white/20 sm:h-[100px] sm:w-[70px]">
-                    <Image
-                      src={src}
-                      alt={label}
-                      fill
-                      className={
-                        book.available
-                          ? 'object-cover'
-                          : 'object-cover grayscale opacity-60'
-                      }
-                      sizes="70px"
-                    />
-                  </div>
-                  <span className="mt-1 block max-w-[4.5rem] truncate text-center text-[9px] leading-tight text-white/90 sm:max-w-[4.75rem] sm:text-[10px]">
-                    {book.available ? book.name : `${book.name} · soon`}
-                  </span>
-                </>
-              )
-              return book.available ? (
-                <Link
-                  key={book.id}
-                  href="/studio-collection"
-                  className="flex shrink-0 flex-col items-center rounded-md p-1 outline-none transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-amber-300"
-                  aria-label={`${label} — open studio collection`}
-                >
-                  {inner}
-                </Link>
-              ) : (
-                <div
-                  key={book.id}
-                  className="flex shrink-0 flex-col items-center p-1 opacity-90"
-                  aria-label={`${label} — coming soon`}
-                >
-                  {inner}
-                </div>
-              )
-            })}
           </div>
         </div>
       </div>

@@ -7,10 +7,13 @@ const GRID_STEP = 10
 const GRID_POINTS = Array.from({ length: 11 }, (_, i) => i * GRID_STEP)
 
 export function PlacementGridOverlay() {
+  const [mounted, setMounted] = useState(false)
   const [visible, setVisible] = useState(true)
   const [cursor, setCursor] = useState({ x: 50, y: 50 })
 
   useEffect(() => {
+    setMounted(true)
+
     const onMouseMove = (event: MouseEvent) => {
       const width = window.innerWidth || 1
       const height = window.innerHeight || 1
@@ -40,6 +43,10 @@ export function PlacementGridOverlay() {
     }),
     [cursor.x, cursor.y],
   )
+
+  if (!mounted) {
+    return null
+  }
 
   if (!visible) {
     return (
